@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
-    <select name="estado" id="estado"></select>
-    <select name="cidade" id="cidade"></select>
+    <select name="estados" id="estados"></select>
+    <select name="cidades" id="cidades"></select>
+    <input type="text" id="inputCEP" placeholder="CEP">
+    <button type="button" id="btnPesquisar">Pesquisar</button>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -16,8 +18,30 @@
     <script>
         $(document).ready(function() {
 
-            $.get('http://ddd.pricez.com.br/estados.json', function(data) {
-                console.log(data);
+            $.get('http://ddd.pricez.com.br/estados.json', function(data, status) {
+                console.log(data, status);
+                data.payload.forEach(function(state, index) {
+                    $("#estados").append(`<option value=${state}>${state}</option>`);
+                });
+            });
+
+            $("#estados").on('change', (e) => {
+                console.log(e);
+                $.get(`http://ddd.pricez.com.br/estados/${e.target.value.toLowerCase()}.json`, (data, status) => {
+                    console.log(data, status);
+                    $("#cidades").html();
+                    data.payload.forEach(function(res, index) {
+                        $("#cidades").append(`<option value=${res.cidade}>${res.cidade}</option>`);
+                    });
+                });
+
+            });
+
+            $("#btnPesquisar").on('click', (e) => {
+                console.log(e);
+                $.get(`http://ddd.pricez.com.br/cep/${$("#inputCEP").val()}.json`, (data, status) => {
+                    console.log(data, status);
+                });
             });
 
         });
