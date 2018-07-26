@@ -1,0 +1,5 @@
+# js-002-sofn-dp-dados-cep
+
+##### Anotações:
+- API para DDDs do Brasil:
+    http://ddd.pricez.com.br/

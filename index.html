@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dados CEP</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <select name="estado" id="estado"></select>
+    <select name="cidade" id="cidade"></select>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+
+            $.get('http://ddd.pricez.com.br/estados.json', function(data) {
+                console.log(data);
+            });
+
+        });
+    </script>
+</body>
+</html>
